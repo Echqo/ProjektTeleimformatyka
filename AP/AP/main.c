@@ -12,6 +12,7 @@
 #include "UART.h"
 #include "hd44780.h"
 
+#define indeks_poczatkowy_ramki 36
 volatile char znak;
 volatile uint8_t indeks_uart=0,flaga_uart=0;
  volatile char bufor_uart[64];
@@ -40,27 +41,27 @@ int main(void)
 	lcd_init();
 	sei();
   
-//	UART_Write("AT+CIPSTART=\"TCP\",\"192.168.4.0\",81");UART_crlf();
-//	_delay_ms(1000);
-	lcd("start");
+	lcd("WiFi signal ");
 	UART_Write("AT+CWJAP?");UART_crlf();
 	DDRC|=1;
 	uint8_t *ptr;
-	
+	char wifi_strength[4];
     while (1) 
     {
 		if(flaga_uart)
 		{
 			flaga_uart=0;
-			if((ptr=znajdz("CWJAP")))
+			if((ptr=znajdz("CWJAP:")))
 			{
-				//pos(0,0);
+				pos(12,0);
 				PORTC^=1;
-				//ptr+=12;
-				lcd_RAM(ptr);
+
+				strcpy(wifi_strength,&bufor_uart[indeks_poczatkowy_ramki]);
+				lcd_RAM(wifi_strength);
 				
-				//UART_Write(*ptr);
-				_delay_ms(1000);
+				_delay_ms(100);
+				memset(bufor_uart,0,sizeof(bufor_uart));
+				
 				UART_Write("AT+CWJAP?");UART_crlf();	
 				
 			}
