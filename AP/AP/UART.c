@@ -5,8 +5,7 @@
 void UART_Init(void)
 {
 	UBRR0H=0;
-	UBRR0L=5;
-	//UCSR0A=(1<<0);
+	UBRR0L=8;		//kolego dla 115200 8 przy @16Mhz ;)
 	UCSR0B=(1<<TXEN0)|(1<<RXEN0)|(1<<RXCIE0);
 	UCSR0C=(1<<UCSZ00)|(1<<UCSZ01);		
 }
