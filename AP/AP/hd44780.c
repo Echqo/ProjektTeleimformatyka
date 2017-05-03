@@ -69,7 +69,7 @@ if(rs==1)RS_1; else RS_0;
     if(v&0x40) D6_1; else D6_0;
     if(v&0x80) D7_1; else D7_0;
     E_0;  
-    _delay_ms(1.5);
+    _delay_ms(2);
 	
 	E_1;
 	
@@ -78,7 +78,7 @@ if(rs==1)RS_1; else RS_0;
     if(v&0x04) D6_1; else D6_0;
     if(v&0x08) D7_1; else D7_0;
     E_0;
-	_delay_ms(1.5);
+	_delay_ms(2);
 	
 	}
 void lcd_init(void)
@@ -87,7 +87,9 @@ void lcd_init(void)
 DDRn|=(1<<DS_PIN)|(1<<ST_PIN)|(1<<SH_PIN);
 
 //WriteToLCD(0x02,LCDCOMMAND);	//cursor home (pos 0,0)
-
+#ifdef CHINA_SHIT
+_delay_ms(20);
+#endif
 LCD_FUNCTION_SET(LCD_FUNCTION_SET_D);
 LCD_DISPLAY(LCD_DISPLAY_D);
 cls;

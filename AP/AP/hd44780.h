@@ -3,12 +3,12 @@
 
 #include <avr/pgmspace.h> //PSTR
 
-#define DDRn DDRD
-#define PORTn PORTD
+#define DDRn DDRC
+#define PORTn PORTC
 
-#define DS_PIN PD5
-#define ST_PIN PD6
-#define SH_PIN PD7
+#define DS_PIN PC0
+#define ST_PIN PC1
+#define SH_PIN PC2
 
 #define DS_0 PORTn&=~(1<<DS_PIN) 
 #define DS_1 PORTn|=(1<<DS_PIN)
@@ -43,7 +43,7 @@ SPI 8MHz / 2						3.265 ms
 
 #define ENABLE_Q7_Q6 0
 
-
+#define CHINA_SHIT
 /* RS */
 
 #define RS_1      rejestr(0x01,LCDWRITE)
