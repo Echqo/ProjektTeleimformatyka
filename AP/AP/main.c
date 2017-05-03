@@ -12,9 +12,7 @@
 #include "UART.h"
 #include "hd44780.h"
 
-#define indeks_poczatkowy_ramki 36
-
-volatile uint8_t indeks_uart=0,flaga_uart=0,cnt=0;
+volatile uint8_t indeks_uart=0,flaga_uart=0;
 volatile char bufor_uart[64];
 volatile char znak;
 
@@ -24,7 +22,6 @@ inline uint8_t* znajdz(const char *pattern);
 ISR(USART_RX_vect)
 {
 	znak=UDR0;
-	cnt++;
 	if(znak==10 || znak ==13)
 	{
 		if(indeks_uart)
@@ -138,7 +135,6 @@ void esp_startup(void)
 			}
 			case ESP_SUCCESS:
 			{
-				lcd("START");
 				server_ready=1;
 				break;
 			}
@@ -151,11 +147,11 @@ int main(void)
 	lcd_init();
 	sei();
   
-	lcd("WiFi signal");
+	lcd("WiFi AP");
 	
 	uint8_t *ptr;
 	char wifi_strength[4];
-//	UART_Write("AT");UART_crlf();
+
     while (1) 
     {
 		if(flaga_uart)
@@ -164,10 +160,11 @@ int main(void)
 			esp_startup();
 			
 		}
-		if(server_ready==1)
+		if(server_ready)
 		{
 			server_ready=0;
 			cls;
+			pos(5,1);
 			lcd("START");
 		}
     }
