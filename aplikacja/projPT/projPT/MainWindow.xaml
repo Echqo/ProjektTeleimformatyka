@@ -1,22 +1,41 @@
 ﻿<Window x:Class="projPT.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Positioning System" Height="800" Width="1280" Background="#FFF7F7F7" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen"
+        Title="Positioning System" Height="800" Width="1280" Background="#FFF7F7F7" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" Closing="Window_Closing"
         
         >
     <Grid>
-        <Grid x:Name="grid_Area" Margin="15,0,0,0" Width="600" Height="600" HorizontalAlignment="Left" VerticalAlignment="Center" Background="White">
+
+        <Border BorderThickness="0" HorizontalAlignment="Left" Height="771" Margin="760,0,0,0" VerticalAlignment="Top" Width="519" Background="#FFFBFBFB" Grid.Column="1"/>
+        <Grid x:Name="grid_Area" Margin="15,0,0,0" Width="600" Height="600" HorizontalAlignment="Left" VerticalAlignment="Center" Background="White" Grid.ColumnSpan="2">
             <Border x:Name="border_Area" BorderBrush="#FF24AFC5" BorderThickness="1" HorizontalAlignment="Left" Height="600"  VerticalAlignment="Center" Width="600" Margin="0"/>
+
         </Grid>
-        <Border BorderThickness="0" HorizontalAlignment="Left" Height="771" Margin="755,0,0,0" VerticalAlignment="Top" Width="519" Background="#FFFBFBFB"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="1038,398,0,0" TextWrapping="Wrap" Text="wyniki kalibracji" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Height="24" Margin="1038,442,0,0" TextWrapping="Wrap" Text="wyniki kalibracji" VerticalAlignment="Top" Width="120"/>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="X" VerticalAlignment="Top" Margin="800,129,0,0" FontSize="36" FontFamily="Segoe UI Light" Height="50" RenderTransformOrigin="1.595,0.847"/>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Y" VerticalAlignment="Top" Margin="1025,129,0,0" FontSize="36" FontFamily="Segoe UI Light" Height="50"/>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="valueX" VerticalAlignment="Top" Margin="850,129,0,0" FontSize="36" Height="50" FontFamily="Segoe UI Light" Foreground="#FF24AFC5"/>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="valueY" VerticalAlignment="Top" Margin="1075,129,0,0" FontSize="36" FontFamily="Segoe UI Light" Foreground="#FF24AFC5"/>
-        <Label Content="Położenie" HorizontalAlignment="Left" Margin="775,50,0,0" VerticalAlignment="Top" FontFamily="Segoe UI Light" FontSize="48"/>
-        <Label Content="Kalibracja" HorizontalAlignment="Left" Margin="775,250,0,0" VerticalAlignment="Top" FontFamily="Segoe UI Light" FontSize="48"/>
+        <ListBox x:Name="listbox_available_COMs" Margin="1150,525,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="200" BorderBrush="{x:Null}" FontFamily="Segoe UI Light" FontSize="18"/>
+        <TextBox x:Name="txtbox_Data" TextWrapping="Wrap" Text="" Margin="800,525,0,0" Height="200" Width="325" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="{x:Null}" FontFamily="Segoe UI Light" FontSize="18" IsReadOnly="True"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="810,329,0,0" TextWrapping="Wrap" Text="wyniki kalibracji" VerticalAlignment="Top" Width="120" Visibility="Hidden"/>
+        <TextBox HorizontalAlignment="Left" Height="24" Margin="960,328,0,0" TextWrapping="Wrap" Text="wyniki kalibracji" VerticalAlignment="Top" Width="120" Visibility="Hidden"/>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="X" VerticalAlignment="Top" Margin="800,130,0,0" FontSize="36" FontFamily="Segoe UI Light" Height="50" RenderTransformOrigin="1.595,0.847" Grid.Column="1"/>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Y" VerticalAlignment="Top" Margin="1050,130,0,0" FontSize="36" FontFamily="Segoe UI Light" Height="50" Grid.Column="1"/>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="valueX" VerticalAlignment="Top" Margin="850,130,0,0" FontSize="36" Height="50" FontFamily="Segoe UI Light" Foreground="#FF24AFC5" Grid.Column="1"/>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="valueY" VerticalAlignment="Top" Margin="1100,130,0,0" FontSize="36" FontFamily="Segoe UI Light" Foreground="#FF24AFC5" Grid.Column="1"/>
+        <Label Content="Położenie" HorizontalAlignment="Left" Margin="775,50,0,0" VerticalAlignment="Top" FontFamily="Segoe UI Light" FontSize="48" Grid.Column="1"/>
+        <Button Content="Połącz" x:Name="btnConnect" HorizontalAlignment="Left" Click="btnConnect_Click" Margin="800,454,0,0" VerticalAlignment="Top" Width="75" Height="50" BorderBrush="#7F24AFC5" FontFamily="Segoe UI Light" FontSize="18" Foreground="#FF24AFC5">
+            <Button.Background>
+                <SolidColorBrush Color="#BFFFFFFF"/>
+            </Button.Background>
+        </Button>
+        <Button Content="Rozłącz" x:Name="btnDisconnect" Click="btnDisconnect_Click" HorizontalAlignment="Left" Margin="976,454,0,0" VerticalAlignment="Top" Width="74" Height="50" BorderBrush="#7F24AFC5" FontFamily="Segoe UI Light" FontSize="18" Foreground="#FF24AFC5">
+            <Button.Background>
+                <SolidColorBrush Color="#BFFFFFFF"/>
+            </Button.Background>
+        </Button>
+        <Button Content="Kalibracja" Margin="775,225,0,0" FontFamily="Segoe UI Light" FontSize="48" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Height="75" BorderBrush="#7F24AFC5" Foreground="#FF24AFC5">
+            <Button.Background>
+                <SolidColorBrush Color="#BFFFFFFF"/>
+            </Button.Background>
+        </Button>
+        <Label Content="Połączenie" HorizontalAlignment="Left" Margin="775,375,0,0" VerticalAlignment="Top" FontFamily="Segoe UI Light" FontSize="48"/>
 
     </Grid>
 </Window>

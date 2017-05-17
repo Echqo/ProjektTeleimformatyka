@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.IO.Ports;
 
 namespace projPT
 {
@@ -29,7 +30,11 @@ namespace projPT
         private double c;
         private double d;
 
-
+        //
+        public static SerialPort sp;
+        public delegate void AddDelegate(String myString);
+        public AddDelegate myDelegate;
+        //
         public MainWindow()
         {
             InitializeComponent();
@@ -49,10 +54,87 @@ namespace projPT
 
             grid_Area.Children.Add(E);
 
-            timer.Interval = TimeSpan.FromMilliseconds(5);
+            this.myDelegate = new AddDelegate(ADM);//
+            
+            search_COMs();//
+
+            timer.Interval = TimeSpan.FromMilliseconds(50);//50ms damy, to i tak za szybko odswiezanie
             timer.Tick += timer_Tick;
         }
 
+        #region connection
+        public void ADM(String myString)//
+        {
+            txtbox_Data.AppendText(myString);
+        }
+        public void Serial_DataReceived(object sender, SerialDataReceivedEventArgs e)//
+        {
+            SerialPort spp = (SerialPort)sender;
+            string s = spp.ReadExisting();
+
+            Application.Current.Dispatcher.Invoke((Action)(() =>
+            {
+                txtbox_Data.Text= s;
+            }));
+        }
+        public void search_COMs()//
+        {
+            btnConnect.IsEnabled = false;
+            var available_COMs = SerialPort.GetPortNames();
+            int nOfCOMs = 0;
+            listbox_available_COMs.Items.Clear();
+            foreach(string com in available_COMs)
+            {
+                listbox_available_COMs.Items.Add(com);
+                nOfCOMs++;
+            }
+            if(nOfCOMs > 0)
+            {
+                btnConnect.IsEnabled = true;
+                btnDisconnect.IsEnabled = false;
+              
+            }
+            else
+            {
+                MessageBox.Show("Podłącz urządzenie", Application.ResourceAssembly.GetName().Name);
+                return;
+            }
+        }
+        private void btnConnect_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                sp = new SerialPort(listbox_available_COMs.SelectedItem.ToString(), 115200, Parity.None, 8, StopBits.One);
+                sp.DataReceived += new SerialDataReceivedEventHandler(Serial_DataReceived);
+                sp.Open();
+                btnConnect.IsEnabled = false;
+                btnDisconnect.IsEnabled = !btnDisconnect.IsEnabled;
+            }
+            catch(NullReferenceException)
+            {
+
+            }
+            catch(Exception)
+            {
+
+            }
+        }
+
+        private void btnDisconnect_Click(object sender, RoutedEventArgs e)
+        {
+            btnDisconnect.IsEnabled = false;
+            btnConnect.IsEnabled = !btnDisconnect.IsEnabled;
+            try
+            {
+                sp.Close();
+            }
+            catch(Exception)
+            {
+
+            }
+        }
+
+        #endregion
         private void Calibration()
         {
 
@@ -97,6 +179,7 @@ namespace projPT
             double[] margin = new double[2];
             margin = XY(S1, S2, a, c, d);
             E.Margin = new Thickness(margin[0], margin[1], 0, 0);
+            GC.Collect();// zobacz czy nie bedzie leak memory  bez tego, jak bedzie to zostaw ten kod, else zakomentuj
         }
 
         private void UpdateEllipsePosition()
@@ -169,5 +252,23 @@ namespace projPT
             else
                 return Math.Sin(alfa - 90) * a;
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)//
+        {
+            try
+            {
+                sp.Close();
+            }
+            catch(Exception)
+            {
+
+            }
+            
+        }
+
+      
+        
+
+       
     }
 }

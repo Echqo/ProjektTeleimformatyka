@@ -12,3 +12,29 @@ C:\Users\Adam\Desktop\studia\sem SIX\PT\project\projPT\projPT\obj\Debug\projPT.P
 C:\Users\Adam\Desktop\studia\sem SIX\PT\project\projPT\projPT\obj\Debug\projPT.csproj.GenerateResource.Cache
 C:\Users\Adam\Desktop\studia\sem SIX\PT\project\projPT\projPT\obj\Debug\projPT.exe
 C:\Users\Adam\Desktop\studia\sem SIX\PT\project\projPT\projPT\obj\Debug\projPT.pdb
+D:\Download\projPT\projPT\projPT\bin\Debug\projPT.exe.config
+D:\Download\projPT\projPT\projPT\obj\Debug\projPT.exe
+D:\Download\projPT\projPT\projPT\obj\Debug\projPT.pdb
+D:\Download\projPT\projPT\projPT\bin\Debug\projPT.exe
+D:\Download\projPT\projPT\projPT\bin\Debug\projPT.pdb
+D:\Download\projPT\projPT\projPT\obj\Debug\projPT.csprojResolveAssemblyReference.cache
+D:\Download\projPT\projPT\projPT\obj\Debug\MainWindow.baml
+D:\Download\projPT\projPT\projPT\obj\Debug\MainWindow.g.cs
+D:\Download\projPT\projPT\projPT\obj\Debug\App.g.cs
+D:\Download\projPT\projPT\projPT\obj\Debug\projPT_MarkupCompile.cache
+D:\Download\projPT\projPT\projPT\obj\Debug\projPT.g.resources
+D:\Download\projPT\projPT\projPT\obj\Debug\projPT.Properties.Resources.resources
+D:\Download\projPT\projPT\projPT\obj\Debug\projPT.csproj.GenerateResource.Cache
+C:\Users\Adam\Documents\nibygithubcostamtree\projektPT\aplikacja\projPT\projPT\bin\Debug\projPT.exe.config
+C:\Users\Adam\Documents\nibygithubcostamtree\projektPT\aplikacja\projPT\projPT\bin\Debug\projPT.exe
+C:\Users\Adam\Documents\nibygithubcostamtree\projektPT\aplikacja\projPT\projPT\bin\Debug\projPT.pdb
+C:\Users\Adam\Documents\nibygithubcostamtree\projektPT\aplikacja\projPT\projPT\obj\Debug\projPT.csprojResolveAssemblyReference.cache
+C:\Users\Adam\Documents\nibygithubcostamtree\projektPT\aplikacja\projPT\projPT\obj\Debug\MainWindow.baml
+C:\Users\Adam\Documents\nibygithubcostamtree\projektPT\aplikacja\projPT\projPT\obj\Debug\MainWindow.g.cs
+C:\Users\Adam\Documents\nibygithubcostamtree\projektPT\aplikacja\projPT\projPT\obj\Debug\App.g.cs
+C:\Users\Adam\Documents\nibygithubcostamtree\projektPT\aplikacja\projPT\projPT\obj\Debug\projPT_MarkupCompile.cache
+C:\Users\Adam\Documents\nibygithubcostamtree\projektPT\aplikacja\projPT\projPT\obj\Debug\projPT.g.resources
+C:\Users\Adam\Documents\nibygithubcostamtree\projektPT\aplikacja\projPT\projPT\obj\Debug\projPT.Properties.Resources.resources
+C:\Users\Adam\Documents\nibygithubcostamtree\projektPT\aplikacja\projPT\projPT\obj\Debug\projPT.csproj.GenerateResource.Cache
+C:\Users\Adam\Documents\nibygithubcostamtree\projektPT\aplikacja\projPT\projPT\obj\Debug\projPT.exe
+C:\Users\Adam\Documents\nibygithubcostamtree\projektPT\aplikacja\projPT\projPT\obj\Debug\projPT.pdb
