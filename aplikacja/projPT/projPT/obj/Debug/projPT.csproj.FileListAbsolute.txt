@@ -1,0 +1,14 @@
+C:\Users\Adam\Documents\studia\PT\project\projPT\projPT\bin\Debug\projPT.exe.config
+C:\Users\Adam\Desktop\studia\sem SIX\PT\project\projPT\projPT\bin\Debug\projPT.exe.config
+C:\Users\Adam\Desktop\studia\sem SIX\PT\project\projPT\projPT\bin\Debug\projPT.exe
+C:\Users\Adam\Desktop\studia\sem SIX\PT\project\projPT\projPT\bin\Debug\projPT.pdb
+C:\Users\Adam\Desktop\studia\sem SIX\PT\project\projPT\projPT\obj\Debug\projPT.csprojResolveAssemblyReference.cache
+C:\Users\Adam\Desktop\studia\sem SIX\PT\project\projPT\projPT\obj\Debug\MainWindow.baml
+C:\Users\Adam\Desktop\studia\sem SIX\PT\project\projPT\projPT\obj\Debug\MainWindow.g.cs
+C:\Users\Adam\Desktop\studia\sem SIX\PT\project\projPT\projPT\obj\Debug\App.g.cs
+C:\Users\Adam\Desktop\studia\sem SIX\PT\project\projPT\projPT\obj\Debug\projPT_MarkupCompile.cache
+C:\Users\Adam\Desktop\studia\sem SIX\PT\project\projPT\projPT\obj\Debug\projPT.g.resources
+C:\Users\Adam\Desktop\studia\sem SIX\PT\project\projPT\projPT\obj\Debug\projPT.Properties.Resources.resources
+C:\Users\Adam\Desktop\studia\sem SIX\PT\project\projPT\projPT\obj\Debug\projPT.csproj.GenerateResource.Cache
+C:\Users\Adam\Desktop\studia\sem SIX\PT\project\projPT\projPT\obj\Debug\projPT.exe
+C:\Users\Adam\Desktop\studia\sem SIX\PT\project\projPT\projPT\obj\Debug\projPT.pdb
