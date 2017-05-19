@@ -70,11 +70,7 @@ void UART_Write(const char *string)
 		UART_Char(*string++);
 	}
 }
-char UART_Read(void)
-{
-	while(!(UCSR0A & (1<<RXC0)));
-	return UDR0;
-}
+
 
 void UART_crlf(void)
 {

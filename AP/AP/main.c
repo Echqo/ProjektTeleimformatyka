@@ -12,19 +12,26 @@
 #include "UART.h"
 #include "hd44780.h"
 
-#define indeks_poczatkowy_ramki 36
-
-volatile uint8_t indeks_uart=0,flaga_uart=0,cnt=0;
-volatile char bufor_uart[64];
+volatile uint8_t indeks_uart=0,flaga_uart=0;
+volatile char esp_uart[64];
 volatile char znak;
+/*
+1						2
 
+			AP
+
+4						3
+*/
 uint8_t server_ready=0;
 #define debug
+#define przesuniecie_ramki_ipd 9
+#define przesuniecie_nr_urzadzenia 2
+uint8_t ipd;
+uint8_t *ptr;
 inline uint8_t* znajdz(const char *pattern);
 ISR(USART_RX_vect)
 {
 	znak=UDR0;
-	cnt++;
 	if(znak==10 || znak ==13)
 	{
 		if(indeks_uart)
@@ -35,7 +42,7 @@ ISR(USART_RX_vect)
 	}
 	if(znak!=13 && znak !=10)
 	{
-		bufor_uart[indeks_uart++]=znak;
+		esp_uart[indeks_uart++]=znak;
 		indeks_uart &= 0x3f;		//utnij gdyby indeks > 63
 	}
 }
@@ -44,6 +51,11 @@ void esp_startup(void)
 	enum esp_enum {ESP_ATE=1,ESP_CWMODE,ESP_CIPAP,ESP_CWSAP,ESP_CIPMUX,ESP_CIPSERVER,ESP_CISPSTO,ESP_SUCCESS};
 	static uint8_t esp_status=0;
 	uint8_t new_cmd=0;
+	if((ptr=znajdz("IPD")))
+	{
+		ipd=1;
+		return;
+	}
 	if(znajdz("ready"))
 	{
 		#ifdef debug
@@ -55,11 +67,12 @@ void esp_startup(void)
 	}
 	else if(znajdz("OK"))
 	{
-		if(esp_status && esp_status < ESP_SUCCESS)
+		if(esp_status && esp_status <= ESP_SUCCESS)
 		{	esp_status++;}
 		new_cmd=1;
-		memset(bufor_uart,0,64);
+		memset(esp_uart,0,64);
 	}
+	
 	if(new_cmd)
 	{
 		new_cmd=0;
@@ -138,36 +151,80 @@ void esp_startup(void)
 			}
 			case ESP_SUCCESS:
 			{
-				lcd("START");
 				server_ready=1;
 				break;
 			}
 		}//switch		
 	}//new cmd
 }
+
 int main(void)
 {
 	UART_Init();
 	lcd_init();
 	sei();
   
-	lcd("WiFi signal");
-	
+	lcd("WiFi AP");
+	char bufor_uart[64];
 	uint8_t *ptr;
-	char wifi_strength[4];
-//	UART_Write("AT");UART_crlf();
+	char wifi_strength[6];
+	
     while (1) 
     {
 		if(flaga_uart)
 		{
 			flaga_uart=0;
 			esp_startup();
-			
+			if(ipd)
+			{
+				
+				pos(0,0);
+				lcd(" ");
+				strcpy(bufor_uart,esp_uart);
+				strcpy(bufor_uart,bufor_uart + przesuniecie_ramki_ipd);//"1,-15"
+				
+				switch(bufor_uart[0]-'0') //testowo na lcd
+				{
+					case 1:
+					{
+						pos(0,0);
+						break;
+					}
+					case 2:
+					{
+						pos(16,0);
+						break;
+					}
+					case 3:
+					{
+						pos(36,1);
+						break;
+					}
+					case 4:
+					{
+						pos(20,1);
+						break;
+					}
+					
+				}
+				
+				strcpy(bufor_uart,bufor_uart + przesuniecie_nr_urzadzenia);
+				//strncpy(wifi_strength,bufor_uart,4);
+				//lcd_RAM(wifi_strength);
+				for(uint8_t i=0;i < 3;i++)
+				{
+					LCD_WRITE_DATA(bufor_uart[i]);
+				}
+				ipd=0;
+				memset(bufor_uart,0,sizeof (bufor_uart));
+				
+			}
 		}
-		if(server_ready==1)
+		if(server_ready)
 		{
 			server_ready=0;
 			cls;
+			pos(5,1);
 			lcd("START");
 		}
     }
@@ -175,7 +232,7 @@ int main(void)
 
 inline uint8_t* znajdz(const char *pattern)
 {
-	return(strstr(bufor_uart,pattern));	
+	return(strstr(esp_uart,pattern));	
 }
 
 //strcpy(wifi_strength,&bufor_uart[indeks_poczatkowy_ramki]);
