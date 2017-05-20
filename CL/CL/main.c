@@ -15,7 +15,7 @@
 volatile uint8_t indeks_uart=0,flaga_uart=0;
 volatile char bufor_uart[64];
 volatile char znak;
-uint8_t EEMEM ee_nr_urzadzenia=1;
+uint8_t EEMEM ee_nr_urzadzenia=2;
 #define debug
 ISR(USART_RX_vect)
 {
@@ -188,10 +188,12 @@ int main(void)
 				lcd("  ");
 				UART_Write("AT+CIPSEND");UART_crlf();
 				_delay_ms(20);
+				UART_int(nr_urzadzenia,10);
+				UART_Char(',');
 				UART_Write(wifi_strength);
-				_delay_ms(35);
+				_delay_ms(40);
 				UART_Write("+++");
-				_delay_ms(35);
+				_delay_ms(40);
 				UART_Write("AT+CWJAP?");UART_crlf();
 			}
 		}
